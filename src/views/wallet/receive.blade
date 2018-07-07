@@ -1,0 +1,24 @@
+section
+  div.scroll
+    table.table.table-bordered.table-striped
+      thead
+        tr
+          th Address
+          th Available
+          th Locked
+          th
+          th
+      tbody
+        foreach addresses as a
+          tr
+            td.smalladdress #{a.address}
+            td.small #{a.availableBalance+" TLS"}
+            td.small #{a.lockedAmount+" TLS"}
+            td.text-center
+              a(href='#')
+                i.icofont.icofont-key.text-success.export(data-address=a.address)
+            td.text-center
+              a(href='#')
+                i.icofont.icofont-ui-delete.text-danger.del(data-address=a.address, data-availableBalance=a.availableBalance, data-lockedAmount=a.lockedAmount)
+  .bottom.text-right
+    a.btn.btn-primary.create-new-address.btn-sm(href='#') Create new address

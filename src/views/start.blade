@@ -1,0 +1,25 @@
+section
+  div.scroll
+    table.table.table-bordered.table-striped
+      tr
+        th Date
+        th Amount
+        th Type
+        th Block
+        th Unlock
+        th Address
+      foreach items as it
+        foreach it.transactions as transaction
+          foreach transaction.transfers as transfer
+            tr
+              td #{new Date(transaction.timestamp * 1000).toLocaleString("en-US")}
+              td #{transfer.amount/1000000000000}
+              - if(transfer.type == 0)
+                td
+                  i.icofont.icofont-arrow-left.text-success.x2
+              - else
+                td
+                  i.icofont.icofont-arrow-right.text-danger.x2
+              td #{'#'+transaction.blockIndex}
+              td @#{transaction.unlockTime}
+              td #{transfer.address.substring(0,5)+"..."+transfer.address.substring(transfer.address.length-5)}

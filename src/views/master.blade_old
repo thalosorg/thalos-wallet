@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/app.css')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.13/css/all.css')
+    link(rel='stylesheet', href='https://allyoucan.cloud/cdn/icofont/1.0.0beta/css/icofont.css')
+  body
+    .container-fluid.master
+      .row.master
+        .col-md-1.red
+          nav
+            ul
+              li.logo
+                img(src='/img/logo_yellow.svg', alt='Thalos Cryptocurrency')
+                | Thalos
+              li
+                a(id='transactions', href='#')
+                  i.icofont.icofont-files
+                  small Transactions
+              li
+                a(id='walletsend', href='#')
+                  i.icofont.icofont-wallet
+                  | Send
+              li
+                a(id='walletreceive', href='#')
+                  i.icofont.icofont-wallet
+                  | Receive
+              li
+                a(id='settings', href='#')
+                  i.icofont.icofont-settings
+                  | Settings
+        .col-md-11.blue#result
+      .row.footer
+        .col-md-1
+          .version
+            div#version
+        .col-md-11
+          ul.list-inline
+            li.list-inline-item
+              span#status.badge.badge-pill.badge-danger &nbsp;
+            li.list-inline-item
+              span#balance
+    script(src='/js/start.js')
+    script(src='https://code.jquery.com/jquery-3.3.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js', integrity='sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ', crossorigin='anonymous')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/app.js')
+    script(src='/js/end.js')

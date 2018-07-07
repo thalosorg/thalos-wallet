@@ -1,0 +1,20 @@
+.text-center
+  .text-center.logo
+    img(src='/img/logo_yellow.svg', alt='Thalos Cryptocurrency', width='10%')
+    h1 Create Thalos Wallet
+  .row
+    .col-md-8.offset-md-2
+      p.alert.alert-primary Strong passwords consist of lower- and uppercase characters (a-z A-Z), multiple numbers and special characters (!,@,#,$,%,^,&,*,?,_,~,-,(,))
+  .row
+    .col-md-4.offset-md-4
+      
+      form#createform(action="/createWalletSave",method="POST")
+        label Password
+        input.form-control#password(type="password",name="password")
+        label Confirm Password
+        input.form-control#password2(type="password",name="password2")
+        label Passwort strength
+        .progress.progress-striped.active
+          #strength.progress-bar.bg-warning(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
+        br
+        input.btn-lg.btn.btn-warning(type="submit",value="Create wallet")

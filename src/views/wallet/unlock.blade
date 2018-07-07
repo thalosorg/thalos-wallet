@@ -1,0 +1,17 @@
+.text-center
+  .text-center.logo.hide
+    img(src='/img/logo_yellow.svg', alt='Thalos Cryptocurrency', width='10%')
+    h1 Unlock Thalos Wallet
+  .row.hide
+    .col-md-8.offset-md-2
+      p.text-warning Your wallet is encrypted. Please input your password to unlock it.
+  .row.hide
+    .col-md-4.offset-md-4
+      form#createform(action="/unlock/wallet",method="POST")
+        label Password
+        input.form-control#password(type="password",name="password")
+        br
+        input.btn-lg.btn.btn-warning(type="submit",value="Unlock wallet")
+  .text-center.hidden
+    h1 Please wait while your wallet is beeing unlocked
+    img#svg-spinner.loader(src='/img/logo_yellow.svg', alt='Thalos Cryptocurrency', width='25%')
