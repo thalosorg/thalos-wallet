@@ -1,4 +1,4 @@
-#Thalos Wallet
+# Thalos Wallet
 
 www.thalos.org
 
