@@ -1,6 +1,6 @@
 //const walletPath = `${__dirname}\\..\\wallet`;
 var spawn = require('child_process').execFile;
-var fs = require('fs'); 
+var fs = require('fs');
 var _ = require('lodash');
 var request = require('request');
 var path = require('path');
@@ -24,16 +24,16 @@ class walletHelper {
     if(params != null) {
        p = {"jsonrpc":"2.0","id":"tls_walet","method":method,  params};
     }
-    
+
     request.post({url:'http://127.0.0.1:1337/json_rpc', body: p, json:true,headers: {
     'Content-Type': 'application/json'
-  }}, function(err,httpResponse,body){ 
+  }}, function(err,httpResponse,body){
 
     if(!_.includes(['getBalance','getStatus','getAddresses'],method)) {
   };
     cb(body);
    });
-  
+
   };
 
   static checkCoinFiles(cb) {
@@ -79,14 +79,14 @@ fs.stat(appdata, function(err, stat) {
 
   prc.on('close', function (code) {
       ////console.log('process exit code ' + code);
-    
+
   });
   };
   static isWalletUnlocked(cb) {
     cb(walletUnlocked);
   }
   static checkIfWalletExists(cb) {
-  
+
     fs.stat(helper.ospath(walletPath+"\\master.thaloswallet"), function(err, stat) {
       if(err == null) {
           cb(true);
@@ -98,7 +98,7 @@ fs.stat(appdata, function(err, stat) {
   };
  static createWallet(password, cb) {
   //[`-c ${__dirname}/wallet/thalos.conf`,`--container-file ${__dirname}/wallet/testcontainer`,'--container-password test']
- 
+
   var prc = spawn(helper.ospath(walletPath+"\\walletd.exe"),['-c', helper.ospath(walletPath+"\\thalos.conf"),'--container-file', helper.ospath(walletPath+"\\master.thaloswallet"), '--container-password', password, '-g']); //'--daemon-address','de.thalos.org'
 
   prc.stdout.setEncoding('utf8');
@@ -125,7 +125,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
  static startWallet() {
   //[`-c ${__dirname}/wallet/thalos.conf`,`--container-file ${__dirname}/wallet/testcontainer`,'--container-password test']
 
-  var prc = spawn(helper.ospath(walletPath+"\\walletd.exe"),['-c', helper.ospath(walletPath+"\\thalos.conf"),'--container-file', helper.ospath(walletPath+"\\master.thaloswallet"), '--container-password', walletPassword, '--daemon-address','127.0.0.1','--daemon-port','46465','--bind-port','1337']); //'--daemon-address','de.thalos.org'
+  var prc = spawn(helper.ospath(walletPath+"\\walletd.exe"),['-c', helper.ospath(walletPath+"\\thalos.conf"),'--container-file', helper.ospath(walletPath+"\\master.thaloswallet"), '--container-password', walletPassword, '--daemon-address','127.0.0.1','--daemon-port','55551','--bind-port','1337']); //'--daemon-address','de.thalos.org'
 
   prc.stdout.setEncoding('utf8');
   var address = "";
@@ -133,7 +133,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
       var str = data.toString()
       var lines = str.split(/(\r?\n)/g);
       //
-      ////console.log(lines.join(""));
+      console.log(lines.join(""));
   });
 
   prc.on('close', function (code) {
@@ -145,14 +145,14 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
  static startDaemon(cb) {
   //[`-c ${__dirname}/wallet/thalos.conf`,`--container-file ${__dirname}/wallet/testcontainer`,'--container-password test']
 
-  var prc = spawn(helper.ospath(walletPath+"\\thalosd.exe"),['--config', helper.ospath(walletPath+"\\thalos.conf")]); //'--daemon-address','de.thalos.org'
+  var prc = spawn(helper.ospath(walletPath+"\\thalosd.exe"),['--config', helper.ospath(walletPath+"\\thalos.conf"),'--log-level','5']); //'--daemon-address','de.thalos.org'
 
   prc.stdout.setEncoding('utf8');
   prc.stdout.on('data', function (data) {
       var str = data.toString()
       var lines = str.split(/(\r?\n)/g);
-   
-      ////console.log(lines.join(""));
+
+      console.log(lines.join(""));
   });
     setTimeout(function () {
        cb();
@@ -165,7 +165,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
  static getWalletStatus(cb) {
   request.post({url:'http://127.0.0.1:1337/json_rpc', json: {"jsonrpc":"2.0","id":"test","method":"getStatus"},headers: {
     'Content-Type': 'application/json'
-  }}, function(err,httpResponse,body){ 
+  }}, function(err,httpResponse,body){
     if(err == null) {
       //wallet sollte laufen
       lastWalletStatus = 1;
@@ -178,7 +178,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
 
   return cb('text-danger');
    });
-  
+
  }
 }
 module.exports = walletHelper;
