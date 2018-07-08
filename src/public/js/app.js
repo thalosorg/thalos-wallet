@@ -1,4 +1,4 @@
-var remote = require('electron').remote;     
+var remote = require('electron').remote;
 var activePage = "home";
 const path = require("path");
 var coinunit= 1000000000000;
@@ -7,7 +7,7 @@ $( ".copy" ).bind( "click", function() {
   copyToClipboard(document.getElementById("address"));
   });
 if(remote.getGlobal('sharedObj').version != remote.getGlobal('sharedObj').walletversion) {
-$('#version').html('<a href="http://www.github.com" target="_blank">'+remote.getGlobal('sharedObj').version+" (Update needed)</a>").css('color','red');
+$('#version').html('<a href="https://github.com/thalosorg/thalos-wallet/releases" target="_blank" style="color:red;">'+remote.getGlobal('sharedObj').version+" (Update needed)</a>");
 
 } else {
 $('#version').text(remote.getGlobal('sharedObj').version);
@@ -146,7 +146,7 @@ function triggerChange(activePage) {
   },
   dataType: "json"
 });
-         
+
     ////console.log(JSON.stringify(transactiondata));
       } else {
         swal("Payment cancelled.","","info");
@@ -265,7 +265,7 @@ function copyToClipboard(elem) {
     var currentFocus = document.activeElement;
     target.focus();
     target.setSelectionRange(0, target.value.length);
-    
+
     // copy the selection
     var succeed;
     try {
@@ -277,7 +277,7 @@ function copyToClipboard(elem) {
     if (currentFocus && typeof currentFocus.focus === "function") {
         currentFocus.focus();
     }
-    
+
     if (isInput) {
         // restore prior selection
         elem.setSelectionRange(origSelectionStart, origSelectionEnd);
