@@ -145,7 +145,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
  static startDaemon(cb) {
   //[`-c ${__dirname}/wallet/thalos.conf`,`--container-file ${__dirname}/wallet/testcontainer`,'--container-password test']
 
-  var prc = spawn(helper.ospath(walletPath+"\\thalosd.exe"),['--config', helper.ospath(walletPath+"\\thalos.conf"),'--log-level','5']); //'--daemon-address','de.thalos.org'
+  var prc = require('child_process').spawn(helper.ospath(walletPath+"\\thalosd.exe"),['--config', helper.ospath(walletPath+"\\thalos.conf"),'--log-level','5']); //'--daemon-address','de.thalos.org'
 
   prc.stdout.setEncoding('utf8');
   prc.stdout.on('data', function (data) {
@@ -158,7 +158,7 @@ if(entry.indexOf('New wallet is generated. Address:') > -1) {
        cb();
     }, 5000);
   prc.on('close', function (code) {
-      //console.log('daemon process exit code ' + code);
+      console.log('daemon process exit code ' + code);
   });
  }
 

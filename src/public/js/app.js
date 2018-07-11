@@ -40,11 +40,14 @@ setInterval(function(){
 
   $.getJSON( "api/wallet/getStatus", function( data ) {
     $('#peers .count').text(data.result.peerCount);
-    var syncstatus = "";
-    if(data.result.blockCount != data.result.knownBlockCount) syncstatus = "text-danger";
-    $('#blocks').html('Synced block <span class="'+syncstatus+'">'+data.result.blockCount+'</span> / '+(data.result.knownBlockCount));
+    if(data.result.blockCount != data.result.knownBlockCount)  {
+      $('#blocks').html('<span class="text-danger">Syncing... ('+data.result.blockCount+'/'+(data.result.knownBlockCount)+')</span>');
+    } else {
+      $('#blocks').html('Synced block <span>'+data.result.blockCount+'</span> / '+(data.result.knownBlockCount));
+
+    }
 });
-}, 2 * 1000);
+}, 3 * 1000);
 function registerAndLoadTemplate(anchor,template) {
   $( "#"+anchor ).bind( "click", function() {
     $('nav li a').removeClass('active');

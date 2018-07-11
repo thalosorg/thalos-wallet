@@ -10,7 +10,7 @@ var downloader = require('./libs/downloader');
 var appdata = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + 'Library/Preferences' : '/var/local');
 appdata = path.join(appdata, 'thalos');
 var coinunit= 1000000000000;
-global.sharedObj = {version: "1.0.0.0",fileversion: "1.0.0.0",status:0};
+global.sharedObj = {version: "1.0.1.0",fileversion: "1.0.0.0",status:0};
 log4js.configure({
     appenders: {
         console:{type:'console', layout: { type: 'colored' }},
@@ -26,6 +26,13 @@ setInterval(function(){
     walletStatus = status;
   });
 }, 5 * 1000);
+
+setInterval(function(){
+
+  walletHelper.query('save',function(result) {
+    console.log("SAVED");
+  });
+}, 60 * 1000);
 walletHelper.checkCoinFiles(function(status) {
 //console.log(status);
   downloader.checkAndDownloadFiles(global.sharedObj)
